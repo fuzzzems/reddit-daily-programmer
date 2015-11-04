@@ -15,29 +15,26 @@ func main(){
 
 	fmt.Println("Enter a number")
 	r.Scan()
-	input, err := strconv.ParseUint(r.Text(), 10, 64)
+	n, err := strconv.ParseUint(r.Text(), 10, 64)
 	if err != nil{
 		panic(err)
 	}
 
-	for input > 1 {
-		c := input % 3
-		switch	c {
-			case 0:
-				fmt.Println(input, 0)
-				break
+	for n > 1 {
+		switch n % 3{
 			case 1:
-				fmt.Println(input, -1)
-				break
+				fmt.Println(n, -1)
+				n--
+				break;
 			case 2:
-				fmt.Println(input, 1)
-				input += 1
-				break
+				fmt.Println(n, 1)
+				n++
+				break;
+		default:
+			fmt.Println(n, 0)
+			break
 		}
-		input /= 3
+		n /= 3;
 	}
-
-	if input ==  1 {
-		fmt.Println(1)
-	}
+	fmt.Println(n)
 }
