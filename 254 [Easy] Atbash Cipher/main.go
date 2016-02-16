@@ -4,8 +4,8 @@
 package main
 
 import (
-	"bytes"
 	"fmt"
+	"strings"
 )
 
 func main() {
@@ -17,22 +17,14 @@ func main() {
 }
 
 func atbash(s string) string {
-	var o bytes.Buffer
-	for _, c := range s {
-
-		var t rune
+	return strings.Map(func(r rune) rune {
 		switch {
-		case c <= 122 && c >= 97:
-			t = 122 - (c % 97)
-		case c <= 90 && c >= 65:
-			t = 90 - (c % 65)
+		case r <= 'z' && r >= 'a':
+			return 'z' - (r % 'a')
+		case r <= 'Z' && r >= 'A':
+			return 'Z' - (r % 'A')
 		default:
-			t = c
+			return r
 		}
-		_, err := o.WriteRune(t)
-		if err != nil {
-			panic(err)
-		}
-	}
-	return o.String()
+	}, s)
 }
